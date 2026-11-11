@@ -1,0 +1,46 @@
+digraph C {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.35, ranksep=0.4];
+node [shape=record, style="filled", fontname="Times New Roman", fontsize=10, color="#2F5597", fillcolor="#F7FBFF"];
+edge [fontname="Times New Roman", fontsize=9, color="#555555"];
+
+warehouse [label="{Warehouse|
+- items Map[String,StockItem]\l
+- movements List[StockMovement]\l|
++ addItem(StockItem)\l
++ receive(String,int)\l
++ issue(String,int)\l
++ findByCategory(Category) List\l
++ totalsByCategory() Map\l
++ addAlmostEmptyItems(Warehouse) List\l
+}", fillcolor="#EAF2F8", color="#2F5597"];
+
+stockitem [label="{StockItem|
+- code String\l
+- name String\l
+- category Category\l
+- quantity int\l|
++ increase(int)\l
++ decrease(int)\l
+}", fillcolor="#EAF2F8", color="#2F5597"];
+
+movement [label="{StockMovement|
+- itemCode String\l
+- type MovementType\l
+- quantity int\l|
++ StockMovement(...)\l
+}", fillcolor="#F7FBFF", color="#2F5597"];
+
+warehouse -> stockitem [
+label="0..*",
+dir=both,
+arrowtail=diamond,
+arrowhead=normal
+];
+
+warehouse -> movement [
+label="0..*",
+dir=both,
+arrowtail=diamond,
+arrowhead=normal
+];
+}
